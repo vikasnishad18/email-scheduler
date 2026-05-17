@@ -1,0 +1,277 @@
+%PDF-1.4
+%����
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [ 5 0 R 7 0 R 9 0 R 11 0 R 13 0 R 15 0 R ] /Count 6 >>
+endobj
+3 0 obj
+<<
+  /Font <<
+    /F1 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+    /F2 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+    /F3 << /Type /Font /Subtype /Type1 /BaseFont /Courier >>
+  >>
+>>
+endobj
+4 0 obj
+<< /Length 3163 >>
+stream
+BT /F2 18 Tf 1 0 0 1 54 738 Tm (Real-Time Email Scheduler — Project Documentation) Tj ET
+BT /F1 11 Tf 1 0 0 1 54 696 Tm (This project is a full-stack “send now / schedule later” email system built around) Tj ET
+BT /F1 11 Tf 1 0 0 1 54 682 Tm (a **queue + worker** architecture, with a **real-time dashboard** showing job) Tj ET
+BT /F1 11 Tf 1 0 0 1 54 668 Tm (status.) Tj ET
+BT /F1 11 Tf 1 0 0 1 54 645 Tm (---) Tj ET
+BT /F2 14 Tf 1 0 0 1 54 622 Tm (1\) What you built \(in 1 minute\)) Tj ET
+BT /F1 11 Tf 1 0 0 1 54 586 Tm (You have three main moving parts:) Tj ET
+BT /F1 11 Tf 1 0 0 1 54 563 Tm (1. **Frontend \(React/Vite\)**: UI to compose emails and view job history/status.) Tj ET
+BT /F1 11 Tf 1 0 0 1 54 549 Tm (2. **API server \(Node/Express + Socket.IO\)**: REST endpoints to create jobs and) Tj ET
+BT /F1 11 Tf 1 0 0 1 54 535 Tm (read job history, and a WebSocket server to broadcast job lifecycle events.) Tj ET
+BT /F1 11 Tf 1 0 0 1 54 521 Tm (3. **Worker \(BullMQ Worker\)**: background process that actually sends the email) Tj ET
+BT /F1 11 Tf 1 0 0 1 54 507 Tm (when BullMQ releases the job \(immediately or after a delay\).) Tj ET
+BT /F1 11 Tf 1 0 0 1 54 484 Tm (Supporting services:) Tj ET
+BT /F1 11 Tf 1 0 0 1 66 461 Tm (• **Redis**: stores the BullMQ queue + delayed jobs.) Tj ET
+BT /F1 11 Tf 1 0 0 1 66 447 Tm (• **PostgreSQL**: stores durable job records and job event timeline.) Tj ET
+BT /F1 11 Tf 1 0 0 1 66 433 Tm (• **MailHog \(dev\)**: captures outgoing emails so you can view them in a browser.) Tj ET
+BT /F1 11 Tf 1 0 0 1 54 410 Tm (---) Tj ET
+BT /F2 14 Tf 1 0 0 1 54 387 Tm (2\) Repository structure) Tj ET
+BT /F1 11 Tf 1 0 0 1 54 351 Tm (Top-level folders:) Tj ET
+BT /F1 11 Tf 1 0 0 1 66 328 Tm (• `frontend/` — React + Vite UI) Tj ET
+BT /F1 11 Tf 1 0 0 1 66 314 Tm (• `backend/` — Docker Compose + Node backend code \(`backend/app/`\)) Tj ET
+BT /F1 11 Tf 1 0 0 1 54 291 Tm (Backend code layout \(`backend/app/`\):) Tj ET
+BT /F1 11 Tf 1 0 0 1 66 268 Tm (• `server.js` — Express API + Socket.IO server) Tj ET
+BT /F1 11 Tf 1 0 0 1 66 254 Tm (• `worker.js` — BullMQ worker that processes queued jobs) Tj ET
+BT /F1 11 Tf 1 0 0 1 66 240 Tm (• `routes/` — HTTP routes) Tj ET
+BT /F1 11 Tf 1 0 0 1 66 226 Tm (• `controllers/` — route handlers \(enqueue jobs, query jobs, retry/delete\)) Tj ET
+BT /F1 11 Tf 1 0 0 1 66 212 Tm (• `jobs/` — BullMQ queue configuration + processors) Tj ET
+BT /F1 11 Tf 1 0 0 1 66 198 Tm (• `services/` — email sending logic) Tj ET
+BT /F1 11 Tf 1 0 0 1 66 184 Tm (• `utils/` — Redis + Nodemailer transport) Tj ET
+BT /F1 11 Tf 1 0 0 1 66 170 Tm (• `db/` — Knex connection + migrations) Tj ET
+BT /F1 11 Tf 1 0 0 1 54 147 Tm (Frontend layout \(`frontend/src/`\):) Tj ET
+BT /F1 11 Tf 1 0 0 1 66 124 Tm (• `main.jsx` / `App.jsx` — app bootstrap and routes) Tj ET
+BT /F1 11 Tf 1 0 0 1 66 110 Tm (• `pages/ComposePage.jsx` — “Compose Email” page) Tj ET
+BT /F1 11 Tf 1 0 0 1 66 96 Tm (• `components/Dashboard.jsx` — dashboard view \(table + job details\)) Tj ET
+BT /F1 11 Tf 1 0 0 1 66 82 Tm (• `hooks/useSocket.js` — Socket.IO client connection) Tj ET
+endstream
+endobj
+5 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources 3 0 R /Contents 4 0 R >>
+endobj
+6 0 obj
+<< /Length 2335 >>
+stream
+BT /F1 11 Tf 1 0 0 1 66 738 Tm (• `hooks/useJobs.js` — fetch jobs + refresh on socket events) Tj ET
+BT /F1 11 Tf 1 0 0 1 66 724 Tm (• `services/emailApi.js` / `services/jobsApi.js` — Axios calls to backend) Tj ET
+BT /F1 11 Tf 1 0 0 1 54 701 Tm (---) Tj ET
+BT /F2 14 Tf 1 0 0 1 54 678 Tm (3\) How to run locally \(recommended\)) Tj ET
+BT /F2 12 Tf 1 0 0 1 54 642 Tm (3.1 Start backend services \(Docker Compose\)) Tj ET
+BT /F1 11 Tf 1 0 0 1 54 617 Tm (From `backend/`:) Tj ET
+BT /F3 9 Tf 1 0 0 1 66 585 Tm (docker compose up --build) Tj ET
+BT /F1 11 Tf 1 0 0 1 54 555 Tm (This starts:) Tj ET
+BT /F1 11 Tf 1 0 0 1 66 532 Tm (• API server: `http://localhost:3000`) Tj ET
+BT /F1 11 Tf 1 0 0 1 66 518 Tm (• Redis: `localhost:6379`) Tj ET
+BT /F1 11 Tf 1 0 0 1 66 504 Tm (• Postgres: `localhost:5432`) Tj ET
+BT /F1 11 Tf 1 0 0 1 66 490 Tm (• Worker: connects to Redis + API WebSocket) Tj ET
+BT /F1 11 Tf 1 0 0 1 66 476 Tm (• MailHog UI: `http://localhost:8025` \(SMTP on `localhost:1025`\)) Tj ET
+BT /F2 12 Tf 1 0 0 1 54 453 Tm (3.2 Configure and start the frontend) Tj ET
+BT /F1 11 Tf 1 0 0 1 54 428 Tm (The frontend expects an environment variable:) Tj ET
+BT /F1 11 Tf 1 0 0 1 66 405 Tm (• `VITE_API_BASE` — base URL for **both** Axios and Socket.IO client) Tj ET
+BT /F1 11 Tf 1 0 0 1 54 382 Tm (Create `frontend/.env`:) Tj ET
+BT /F3 9 Tf 1 0 0 1 66 350 Tm (VITE_API_BASE=http://localhost:3000) Tj ET
+BT /F1 11 Tf 1 0 0 1 54 320 Tm (Then from `frontend/`:) Tj ET
+BT /F3 9 Tf 1 0 0 1 66 288 Tm (npm install) Tj ET
+BT /F3 9 Tf 1 0 0 1 66 276 Tm (npm run dev) Tj ET
+BT /F1 11 Tf 1 0 0 1 54 246 Tm (Vite prints the local dev URL \(usually `http://localhost:5173`\).) Tj ET
+BT /F1 11 Tf 1 0 0 1 54 223 Tm (---) Tj ET
+BT /F2 14 Tf 1 0 0 1 54 200 Tm (4\) Main workflows \(end-to-end\)) Tj ET
+BT /F2 12 Tf 1 0 0 1 54 164 Tm (Workflow A — “Send now”) Tj ET
+BT /F1 11 Tf 1 0 0 1 54 139 Tm (1. User fills the “Compose Email” form and chooses **Send now**.) Tj ET
+BT /F1 11 Tf 1 0 0 1 54 125 Tm (2. Frontend calls `POST /api/send-email`.) Tj ET
+BT /F1 11 Tf 1 0 0 1 54 111 Tm (3. API enqueues a BullMQ job in Redis \(attempts + exponential backoff\).) Tj ET
+BT /F1 11 Tf 1 0 0 1 54 97 Tm (4. API inserts a row into Postgres table `jobs` and a `job_events` entry) Tj ET
+BT /F1 11 Tf 1 0 0 1 54 83 Tm (\(`queued`\).) Tj ET
+endstream
+endobj
+7 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources 3 0 R /Contents 6 0 R >>
+endobj
+8 0 obj
+<< /Length 3067 >>
+stream
+BT /F1 11 Tf 1 0 0 1 54 738 Tm (5. API broadcasts `job:queued` via Socket.IO.) Tj ET
+BT /F1 11 Tf 1 0 0 1 54 724 Tm (6. Worker receives job from Redis and marks it **active** in Postgres + inserts) Tj ET
+BT /F1 11 Tf 1 0 0 1 54 710 Tm (`started` event.) Tj ET
+BT /F1 11 Tf 1 0 0 1 54 696 Tm (7. Worker sends the email via Nodemailer \(MailHog in dev\).) Tj ET
+BT /F1 11 Tf 1 0 0 1 54 682 Tm (8. Worker marks job **completed** \(or **failed**\) and writes a `completed`/`failed`) Tj ET
+BT /F1 11 Tf 1 0 0 1 54 668 Tm (event.) Tj ET
+BT /F1 11 Tf 1 0 0 1 54 654 Tm (9. Worker emits `job:started`, `job:completed`, or `job:failed` so the dashboard) Tj ET
+BT /F1 11 Tf 1 0 0 1 54 640 Tm (refreshes live.) Tj ET
+BT /F2 12 Tf 1 0 0 1 54 617 Tm (Workflow B — “Schedule for later”) Tj ET
+BT /F1 11 Tf 1 0 0 1 54 592 Tm (1. User chooses **Schedule** and selects a local datetime.) Tj ET
+BT /F1 11 Tf 1 0 0 1 54 578 Tm (2. Frontend converts that datetime to **UTC ISO string** \(`toISOString\(\)`\).) Tj ET
+BT /F1 11 Tf 1 0 0 1 54 564 Tm (3. Frontend calls `POST /api/schedule-email` with `sendAt`.) Tj ET
+BT /F1 11 Tf 1 0 0 1 54 550 Tm (4. API computes `delay = sendAt - now` and creates a delayed BullMQ job.) Tj ET
+BT /F1 11 Tf 1 0 0 1 54 536 Tm (5. The job sits in Redis until it is due, then the worker processes it the same way) Tj ET
+BT /F1 11 Tf 1 0 0 1 54 522 Tm (as “Send now”.) Tj ET
+BT /F2 12 Tf 1 0 0 1 54 499 Tm (Workflow C — “Retry failed job”) Tj ET
+BT /F1 11 Tf 1 0 0 1 54 474 Tm (1. Dashboard calls `POST /api/jobs/:id/retry` for a job whose status is `failed`.) Tj ET
+BT /F1 11 Tf 1 0 0 1 54 460 Tm (2. API creates a **new** BullMQ job with the same email payload.) Tj ET
+BT /F1 11 Tf 1 0 0 1 54 446 Tm (3. API inserts a new `jobs` row and records a `requeued` event.) Tj ET
+BT /F2 12 Tf 1 0 0 1 54 423 Tm (Workflow D — “Delete job”) Tj ET
+BT /F1 11 Tf 1 0 0 1 54 398 Tm (1. Dashboard calls `DELETE /api/jobs/:id`.) Tj ET
+BT /F1 11 Tf 1 0 0 1 54 384 Tm (2. API tries to remove the job from BullMQ \(if still present\).) Tj ET
+BT /F1 11 Tf 1 0 0 1 54 370 Tm (3. API deletes the job and its events from Postgres.) Tj ET
+BT /F1 11 Tf 1 0 0 1 54 347 Tm (---) Tj ET
+BT /F2 14 Tf 1 0 0 1 54 324 Tm (5\) Backend API reference) Tj ET
+BT /F1 11 Tf 1 0 0 1 54 288 Tm (Base URL: `http://localhost:3000`) Tj ET
+BT /F2 12 Tf 1 0 0 1 54 265 Tm (Send immediately) Tj ET
+BT /F1 11 Tf 1 0 0 1 66 240 Tm (• `POST /api/send-email`) Tj ET
+BT /F1 11 Tf 1 0 0 1 66 226 Tm (• Body:) Tj ET
+BT /F1 11 Tf 1 0 0 1 66 212 Tm (• `to` \(string\)) Tj ET
+BT /F1 11 Tf 1 0 0 1 66 198 Tm (• `subject` \(string\)) Tj ET
+BT /F1 11 Tf 1 0 0 1 66 184 Tm (• `body` \(string\)) Tj ET
+BT /F1 11 Tf 1 0 0 1 66 170 Tm (• Response: `{ queued: true, jobId: "..." }`) Tj ET
+BT /F2 12 Tf 1 0 0 1 54 147 Tm (Schedule for later) Tj ET
+BT /F1 11 Tf 1 0 0 1 66 122 Tm (• `POST /api/schedule-email`) Tj ET
+BT /F1 11 Tf 1 0 0 1 66 108 Tm (• Body:) Tj ET
+BT /F1 11 Tf 1 0 0 1 66 94 Tm (• `to` \(string\)) Tj ET
+BT /F1 11 Tf 1 0 0 1 66 80 Tm (• `subject` \(string\)) Tj ET
+endstream
+endobj
+9 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources 3 0 R /Contents 8 0 R >>
+endobj
+10 0 obj
+<< /Length 2333 >>
+stream
+BT /F1 11 Tf 1 0 0 1 66 738 Tm (• `body` \(string\)) Tj ET
+BT /F1 11 Tf 1 0 0 1 66 724 Tm (• `sendAt` \(string, ISO datetime in the future; recommended UTC via) Tj ET
+BT /F1 11 Tf 1 0 0 1 66 710 Tm (`toISOString\(\)`\)) Tj ET
+BT /F1 11 Tf 1 0 0 1 66 696 Tm (• Response: `{ scheduled: true, jobId: "..." }`) Tj ET
+BT /F2 12 Tf 1 0 0 1 54 673 Tm (List jobs \(dashboard table\)) Tj ET
+BT /F1 11 Tf 1 0 0 1 66 648 Tm (• `GET /api/jobs`) Tj ET
+BT /F1 11 Tf 1 0 0 1 66 634 Tm (• Response: array of job rows from Postgres \(most recent first\)) Tj ET
+BT /F2 12 Tf 1 0 0 1 54 611 Tm (Job details + timeline \(modal\)) Tj ET
+BT /F1 11 Tf 1 0 0 1 66 586 Tm (• `GET /api/jobs/:id`) Tj ET
+BT /F1 11 Tf 1 0 0 1 66 572 Tm (• Response:) Tj ET
+BT /F1 11 Tf 1 0 0 1 66 558 Tm (• `job` — row from `jobs`) Tj ET
+BT /F1 11 Tf 1 0 0 1 66 544 Tm (• `events` — ordered rows from `job_events`) Tj ET
+BT /F2 12 Tf 1 0 0 1 54 521 Tm (Stats \(not currently used by UI\)) Tj ET
+BT /F1 11 Tf 1 0 0 1 66 496 Tm (• `GET /api/stats`) Tj ET
+BT /F1 11 Tf 1 0 0 1 66 482 Tm (• Response: grouped counts by `status`) Tj ET
+BT /F2 12 Tf 1 0 0 1 54 459 Tm (Retry failed job) Tj ET
+BT /F1 11 Tf 1 0 0 1 66 434 Tm (• `POST /api/jobs/:id/retry`) Tj ET
+BT /F1 11 Tf 1 0 0 1 66 420 Tm (• Notes: only allowed when `status === "failed"`) Tj ET
+BT /F2 12 Tf 1 0 0 1 54 397 Tm (Delete job) Tj ET
+BT /F1 11 Tf 1 0 0 1 66 372 Tm (• `DELETE /api/jobs/:id`) Tj ET
+BT /F1 11 Tf 1 0 0 1 54 349 Tm (---) Tj ET
+BT /F2 14 Tf 1 0 0 1 54 326 Tm (6\) Real-time events \(Socket.IO\)) Tj ET
+BT /F1 11 Tf 1 0 0 1 54 290 Tm (The API server runs Socket.IO on the same host/port as the REST API) Tj ET
+BT /F1 11 Tf 1 0 0 1 54 276 Tm (\(`http://localhost:3000`\).) Tj ET
+BT /F1 11 Tf 1 0 0 1 54 253 Tm (Frontend listens for:) Tj ET
+BT /F1 11 Tf 1 0 0 1 66 230 Tm (• `job:queued`) Tj ET
+BT /F1 11 Tf 1 0 0 1 66 216 Tm (• `job:started`) Tj ET
+BT /F1 11 Tf 1 0 0 1 66 202 Tm (• `job:completed`) Tj ET
+BT /F1 11 Tf 1 0 0 1 66 188 Tm (• `job:failed`) Tj ET
+BT /F1 11 Tf 1 0 0 1 54 165 Tm (When any of these are received, the frontend re-fetches `GET /api/jobs` to refresh) Tj ET
+BT /F1 11 Tf 1 0 0 1 54 151 Tm (the table.) Tj ET
+BT /F1 11 Tf 1 0 0 1 54 128 Tm (---) Tj ET
+BT /F2 14 Tf 1 0 0 1 54 105 Tm (7\) Database schema \(PostgreSQL via Knex migrations\)) Tj ET
+endstream
+endobj
+11 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources 3 0 R /Contents 10 0 R >>
+endobj
+12 0 obj
+<< /Length 2751 >>
+stream
+BT /F2 12 Tf 1 0 0 1 54 738 Tm (`jobs` table \(`backend/app/db/migrations/001_create_jobs.js`\)) Tj ET
+BT /F1 11 Tf 1 0 0 1 66 713 Tm (• `id` \(string, primary key\) — uses BullMQ job id) Tj ET
+BT /F1 11 Tf 1 0 0 1 66 699 Tm (• `type` \(string\) — `send` or `scheduled`) Tj ET
+BT /F1 11 Tf 1 0 0 1 66 685 Tm (• `to_email`, `subject`, `body`) Tj ET
+BT /F1 11 Tf 1 0 0 1 66 671 Tm (• `status` — `queued` | `active` | `completed` | `failed`) Tj ET
+BT /F1 11 Tf 1 0 0 1 66 657 Tm (• `attempts` \(int\), `failed_reason` \(text\)) Tj ET
+BT /F1 11 Tf 1 0 0 1 66 643 Tm (• `queued_at`, `started_at`, `completed_at` \(timestamps\)) Tj ET
+BT /F2 12 Tf 1 0 0 1 54 620 Tm (`job_events` table \(`backend/app/db/migrations/002_create_job_events.js`\)) Tj ET
+BT /F1 11 Tf 1 0 0 1 66 595 Tm (• `id` \(auto increment\)) Tj ET
+BT /F1 11 Tf 1 0 0 1 66 581 Tm (• `job_id` \(string\)) Tj ET
+BT /F1 11 Tf 1 0 0 1 66 567 Tm (• `event_type` — `queued`, `started`, `completed`, `failed`, `requeued`) Tj ET
+BT /F1 11 Tf 1 0 0 1 66 553 Tm (• `data` \(jsonb\) — optional metadata \(error, sendAt, etc.\)) Tj ET
+BT /F1 11 Tf 1 0 0 1 66 539 Tm (• `created_at` \(timestamp\)) Tj ET
+BT /F1 11 Tf 1 0 0 1 54 516 Tm (---) Tj ET
+BT /F2 14 Tf 1 0 0 1 54 493 Tm (8\) Background processing \(BullMQ\)) Tj ET
+BT /F1 11 Tf 1 0 0 1 54 457 Tm (Queue:) Tj ET
+BT /F1 11 Tf 1 0 0 1 66 434 Tm (• `backend/app/jobs/emailQueue.js` creates a BullMQ queue named `emailQueue`.) Tj ET
+BT /F1 11 Tf 1 0 0 1 54 411 Tm (Worker:) Tj ET
+BT /F1 11 Tf 1 0 0 1 66 388 Tm (• `backend/app/worker.js` starts a BullMQ `Worker\("emailQueue", ...\)`.) Tj ET
+BT /F1 11 Tf 1 0 0 1 66 374 Tm (• It listens to `active`, `completed`, `failed` events and:) Tj ET
+BT /F1 11 Tf 1 0 0 1 66 360 Tm (• updates `jobs` table) Tj ET
+BT /F1 11 Tf 1 0 0 1 66 346 Tm (• inserts `job_events`) Tj ET
+BT /F1 11 Tf 1 0 0 1 66 332 Tm (• emits Socket.IO events \(via a Socket.IO client connected to the API server\)) Tj ET
+BT /F1 11 Tf 1 0 0 1 54 309 Tm (Processor:) Tj ET
+BT /F1 11 Tf 1 0 0 1 66 286 Tm (• `backend/app/jobs/processors/sendEmail.js` calls `emailService.send\(...\)`.) Tj ET
+BT /F1 11 Tf 1 0 0 1 54 263 Tm (---) Tj ET
+BT /F2 14 Tf 1 0 0 1 54 240 Tm (9\) Email delivery in development \(MailHog\)) Tj ET
+BT /F1 11 Tf 1 0 0 1 54 204 Tm (In Docker Compose, SMTP is set to:) Tj ET
+BT /F1 11 Tf 1 0 0 1 66 181 Tm (• Host: `mailhog`) Tj ET
+BT /F1 11 Tf 1 0 0 1 66 167 Tm (• Port: `1025`) Tj ET
+BT /F1 11 Tf 1 0 0 1 54 144 Tm (MailHog inbox UI:) Tj ET
+BT /F1 11 Tf 1 0 0 1 66 121 Tm (• `http://localhost:8025`) Tj ET
+BT /F1 11 Tf 1 0 0 1 54 98 Tm (So when the worker sends an email, you’ll see it in MailHog instead of a real) Tj ET
+BT /F1 11 Tf 1 0 0 1 54 84 Tm (inbox.) Tj ET
+endstream
+endobj
+13 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources 3 0 R /Contents 12 0 R >>
+endobj
+14 0 obj
+<< /Length 1776 >>
+stream
+BT /F1 11 Tf 1 0 0 1 54 729 Tm (---) Tj ET
+BT /F2 14 Tf 1 0 0 1 54 706 Tm (10\) Notes / gotchas found during analysis) Tj ET
+BT /F1 11 Tf 1 0 0 1 54 670 Tm (1. **Frontend socket hook is used twice**:) Tj ET
+BT /F1 11 Tf 1 0 0 1 66 656 Tm (• `App.jsx` already creates a socket and passes it into `Dashboard`.) Tj ET
+BT /F1 11 Tf 1 0 0 1 66 642 Tm (• `Dashboard.jsx` currently creates a second socket and doesn’t use the prop.) Tj ET
+BT /F1 11 Tf 1 0 0 1 66 628 Tm (• This can prevent live refresh from working as intended.) Tj ET
+BT /F1 11 Tf 1 0 0 1 54 605 Tm (2. **Backend DB connection is hard-coded in `backend/app/db/knex.js`**:) Tj ET
+BT /F1 11 Tf 1 0 0 1 66 591 Tm (• Docker Compose works because service names \(`postgres`\) are resolvable inside) Tj ET
+BT /F1 11 Tf 1 0 0 1 66 577 Tm (the Docker network.) Tj ET
+BT /F1 11 Tf 1 0 0 1 66 563 Tm (• If you want to run backend outside Docker, you’ll likely want to use env vars) Tj ET
+BT /F1 11 Tf 1 0 0 1 66 549 Tm (consistently \(the repo also has `knexfile.js` that already reads env vars\).) Tj ET
+BT /F1 11 Tf 1 0 0 1 54 526 Tm (3. **Prisma config exists but doesn’t appear to be used**:) Tj ET
+BT /F1 11 Tf 1 0 0 1 66 512 Tm (• `backend/app/prisma.config.js` references Prisma, but the app uses Knex) Tj ET
+BT /F1 11 Tf 1 0 0 1 66 498 Tm (migrations for tables.) Tj ET
+BT /F1 11 Tf 1 0 0 1 54 475 Tm (---) Tj ET
+BT /F2 14 Tf 1 0 0 1 54 452 Tm (11\) If you want, I can also) Tj ET
+BT /F1 11 Tf 1 0 0 1 66 416 Tm (• Fix the frontend socket/dashboard wiring so “Live” updates always work.) Tj ET
+BT /F1 11 Tf 1 0 0 1 66 402 Tm (• Add a “Stats” row to the dashboard using `GET /api/stats`.) Tj ET
+BT /F1 11 Tf 1 0 0 1 66 388 Tm (• Add `.env.example` files for frontend and backend.) Tj ET
+endstream
+endobj
+15 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources 3 0 R /Contents 14 0 R >>
+endobj
+xref
+0 16
+0000000000 65535 f 
+0000000015 00000 n 
+0000000064 00000 n 
+0000000156 00000 n 
+0000000385 00000 n 
+0000003600 00000 n 
+0000003704 00000 n 
+0000006091 00000 n 
+0000006195 00000 n 
+0000009314 00000 n 
+0000009418 00000 n 
+0000011804 00000 n 
+0000011910 00000 n 
+0000014714 00000 n 
+0000014820 00000 n 
+0000016649 00000 n 
+trailer
+<< /Size 16 /Root 1 0 R >>
+startxref
+16755
+%%EOF
